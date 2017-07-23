@@ -1,10 +1,9 @@
-import {Fighter, ImprovedFighter} from './classes';
-
+import {IFighter, IImprovedFighter, Fighter, ImprovedFighter} from './classes';
 
 let alliancePilot = new Fighter("X-wing", 20, 1000);
 let empirePilot = new ImprovedFighter("TIE Fighter", 25, 800);
 
-let fight = (fighter: Fighter, improvedFighter: ImprovedFighter, ...points: number[]) => {
+let fight = (fighter: IFighter, improvedFighter: IImprovedFighter, ...points: number[]) => {
   let firstMove;
   Math.random() > 0.5 ? firstMove = 1 : firstMove = 0;
   for (let point of points) {

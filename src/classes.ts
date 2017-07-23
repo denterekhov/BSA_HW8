@@ -1,8 +1,18 @@
-import {IFighter, IImprovedFighter} from './interfaces';
+interface IFighter {
+  name: string;
+  health: number;
+  setDamage:(damage: number) => void;
+  hit:(enemy: IImprovedFighter, point: number) => void
+}
+
+interface IImprovedFighter extends IFighter {
+  doubleHit:(enemy: IFighter, point: number) => void
+}
+
 
 class Fighter implements IFighter {
   name: string;
-  power: number;
+  protected power: number;
   health: number
 
   constructor(name: string = "Unknown ship", power: number = 27, health: number = 500) {
@@ -16,7 +26,7 @@ class Fighter implements IFighter {
     console.log(`${this.name} health: ${this.health}`);
   }
 
-  hit(enemy: Fighter, point: number): void {
+  hit(enemy: IFighter, point: number): void {
     let damage = point * this.power;
     enemy.setDamage(damage);
   }
@@ -24,10 +34,10 @@ class Fighter implements IFighter {
 
 
 class ImprovedFighter extends Fighter implements IImprovedFighter {
-  doubleHit(enemy: Fighter, point: number): void {
+  doubleHit(enemy: IFighter, point: number): void {
     let doublePoint = point * 2;
     super.hit(enemy, doublePoint);
   }
 }
 
-export {Fighter, ImprovedFighter};
+export {IFighter, IImprovedFighter, Fighter, ImprovedFighter};
